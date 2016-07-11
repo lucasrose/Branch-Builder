@@ -10,9 +10,17 @@ import Cocoa
 
 class StatusViewController: NSViewController {
 
+    @IBOutlet weak var lintCompileTestStatus: NSImageView!
+    @IBOutlet weak var pythonTestStatus: NSImageView!
+    @IBOutlet weak var rubyLintTestStatus: NSImageView!
+    @IBOutlet weak var unitIntegrationTestStatus: NSImageView!
+    @IBOutlet weak var branchAcceptanceTestStatus: NSImageView!
+    @IBOutlet weak var distTestStatus: NSImageView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do view setup here.
+        
     }
     
 }

@@ -15,6 +15,7 @@
 		08D4E8011D33E5DD003D7A25 /* Branch_BuilderUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D4E8001D33E5DD003D7A25 /* Branch_BuilderUITests.swift */; };
 		08D8B1801D33FF2B00E463FD /* StatusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D8B17E1D33FF2B00E463FD /* StatusViewController.swift */; };
 		08D8B1811D33FF2B00E463FD /* StatusViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08D8B17F1D33FF2B00E463FD /* StatusViewController.xib */; };
+		08D8B1831D340E0600E463FD /* JenkinsTestCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D8B1821D340E0600E463FD /* JenkinsTestCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,7 @@
 		08D4E8021D33E5DD003D7A25 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		08D8B17E1D33FF2B00E463FD /* StatusViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatusViewController.swift; sourceTree = "<group>"; };
 		08D8B17F1D33FF2B00E463FD /* StatusViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StatusViewController.xib; sourceTree = "<group>"; };
+		08D8B1821D340E0600E463FD /* JenkinsTestCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JenkinsTestCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,6 +106,7 @@
 				08D4E7E91D33E5DD003D7A25 /* MainMenu.xib */,
 				08D8B17E1D33FF2B00E463FD /* StatusViewController.swift */,
 				08D8B17F1D33FF2B00E463FD /* StatusViewController.xib */,
+				08D8B1821D340E0600E463FD /* JenkinsTestCell.swift */,
 				08D4E7EC1D33E5DD003D7A25 /* Info.plist */,
 				08D4E7E41D33E5DD003D7A25 /* Branch_Builder.xcdatamodeld */,
 			);
@@ -270,6 +273,7 @@
 			files = (
 				08D4E7E31D33E5DD003D7A25 /* AppDelegate.swift in Sources */,
 				08D8B1801D33FF2B00E463FD /* StatusViewController.swift in Sources */,
+				08D8B1831D340E0600E463FD /* JenkinsTestCell.swift in Sources */,
 				08D4E7E61D33E5DD003D7A25 /* Branch_Builder.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
