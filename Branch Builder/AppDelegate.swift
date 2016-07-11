@@ -18,12 +18,22 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     let statusPopover = NSPopover()
     let statusItem = NSStatusBar.system().statusItem(withLength: NSVariableStatusItemLength)
-    let ct = 0
-    
+    var branchName: String? = nil
     //MARK: - IBAction Methods
     
     @IBAction func buildBranchClicked(_ sender: NSMenuItem) {
-        
+        //define branch name to be using for build
+        if branchName == nil {
+            let branch = getBranchName()
+            if branch != "" {
+                branchName = branch
+                print(branchName)
+            }
+            else{
+                return;
+            }
+            
+        }
         setStatusItemImage(iconName: "status-icon-in-progress")
         
         buildBranch.isEnabled = false //set to be enabled after callback from getting status results from jenkins
@@ -34,7 +44,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         //Will set status to be clickable after callback response
         //at the moment just make it display popover
         //TODO
-        if (status.isEnabled) {
+        if status.isEnabled {
             showPopover()
         }
         
@@ -47,6 +57,22 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
     //MARK: - Helper Methods
+    
+    func getBranchName() -> String?{
+        //Create popup to enter branch name
+        let inputName = NSAlert()
+        let inputText = NSTextField(frame: NSRect(x: 0, y: 0, width: 200, height: 24))
+        
+        inputText.stringValue = ""
+
+        inputName.messageText = "Enter Branch Name:"
+        inputName.addButton(withTitle: "Done")
+        inputName.accessoryView = inputText
+        
+        inputName.runModal()
+        
+        return inputText.stringValue
+    }
     
     func setStatusItemImage(iconName: String!){
         let icon = NSImage(named: iconName)
@@ -61,6 +87,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
     func setupPopover() {
+        
         statusPopover.contentViewController = StatusViewController(nibName: "StatusViewController", bundle: nil)
         statusPopover.behavior = NSPopoverBehavior.transient
     }
@@ -69,9 +96,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
     
-        setupPopover()
         statusItem.menu = statusMenu
         setStatusItemImage(iconName: "status-icon")
+        setupPopover()
     }
     
     func applicationWillTerminate(_ aNotification: Notification) {

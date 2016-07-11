@@ -11,7 +11,7 @@
             </connections>
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
-        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <customObject id="-3" userLabel="Application"/>
         <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="Branch_Builder" customModuleProvider="target">
             <connections>
                 <outlet property="buildBranch" destination="T0q-af-01h" id="A1Z-iQ-1tV"/>
@@ -53,7 +53,7 @@
             <point key="canvasLocation" x="-16" y="-125"/>
         </menu>
         <viewController id="YGf-Wg-rrH" userLabel="Popover View Controller" customClass="StatusViewController" customModule="Branch_Builder" customModuleProvider="target"/>
-        <popover id="N9A-8R-bwQ">
+        <popover behavior="t" id="N9A-8R-bwQ">
             <connections>
                 <outlet property="contentViewController" destination="YGf-Wg-rrH" id="lwb-OY-k4f"/>
             </connections>

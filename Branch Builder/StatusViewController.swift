@@ -8,19 +8,37 @@
 
 import Cocoa
 
-class StatusViewController: NSViewController {
-
-    @IBOutlet weak var lintCompileTestStatus: NSImageView!
-    @IBOutlet weak var pythonTestStatus: NSImageView!
-    @IBOutlet weak var rubyLintTestStatus: NSImageView!
-    @IBOutlet weak var unitIntegrationTestStatus: NSImageView!
-    @IBOutlet weak var branchAcceptanceTestStatus: NSImageView!
-    @IBOutlet weak var distTestStatus: NSImageView!
+class StatusViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSource {
+    
+    @IBOutlet weak var tableView: NSTableView!
+    
+    @IBOutlet weak var branchName: NSTextField!
+    
+    let data = ["LINT-COMPILE", "PYTHON", "RUBY-LINT", "UNIT INTEGRATION", "BRANCH ACCEPTANCE", "DIST"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do view setup here.
-        
+        tableView.dataSource = self
+        tableView.delegate = self
+        tableView.reloadData()
     }
     
+    func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
+        
+        //var image:NSImage?
+        if let cell = tableView.make(withIdentifier: "TestNameCell", owner: nil) as? NSTableCellView {
+            cell.textField?.stringValue = data[row]
+            setTestImage(cell: cell, iconName: "test-icon-in-progress")
+            return cell
+        }
+        return nil
+    }
+    func numberOfRows(in tableView: NSTableView) -> Int {
+        return data.count
+    }
+    
+    func setTestImage(cell: NSTableCellView, iconName: String!) {
+        let icon = NSImage(named: iconName)
+        cell.imageView?.image = icon
+    }
 }
