@@ -13,16 +13,18 @@ class StatusViewController: NSViewController, NSTableViewDelegate, NSTableViewDa
     @IBOutlet weak var tableView: NSTableView!
     
     @IBOutlet weak var branchName: NSTextField!
+    var branch: String? = nil
     
     let data = ["LINT-COMPILE", "PYTHON", "RUBY-LINT", "UNIT INTEGRATION", "BRANCH ACCEPTANCE", "DIST"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        print(branch)
         tableView.dataSource = self
         tableView.delegate = self
         tableView.reloadData()
     }
-    
+
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
         
         //var image:NSImage?

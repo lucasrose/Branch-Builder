@@ -27,7 +27,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             let branch = getBranchName()
             if branch != "" {
                 branchName = branch
-                print(branchName)
             }
             else{
                 return;
@@ -46,6 +45,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         //TODO
         if status.isEnabled {
             showPopover()
+            
         }
         
         //after the callback is finished we will set buildBranch to be enabled again
@@ -82,6 +82,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     func showPopover() {
         if let button = statusItem.button {
+            statusPopover.animates = true
             statusPopover.show(relativeTo: button.bounds, of: button, preferredEdge: NSRectEdge.minY)
         }
     }
@@ -89,6 +90,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     func setupPopover() {
         
         statusPopover.contentViewController = StatusViewController(nibName: "StatusViewController", bundle: nil)
+        statusPopover.contentViewController?.setValue(branchName, forKey: "branch") //fix here <<<<<---------------
         statusPopover.behavior = NSPopoverBehavior.transient
     }
     
