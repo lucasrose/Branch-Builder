@@ -12,10 +12,30 @@ import Cocoa
 class AppDelegate: NSObject, NSApplicationDelegate {
 
     @IBOutlet weak var window: NSWindow!
+    @IBOutlet weak var statusMenu: NSMenu!
 
-
+    let statusItem = NSStatusBar.system().statusItem(withLength: NSVariableStatusItemLength)
+    let ct = 0
+    
+    @IBAction func buildBranchClicked(_ sender: NSMenuItem) {
+        let icon = NSImage(named: "status-icon-in-progress")
+        
+        statusItem.image = icon
+    }
+    
+    @IBAction func aboutClicked(_ sender: NSMenuItem) {
+    }
+    
+    @IBAction func quitClicked(_ sender: AnyObject) {
+        NSApplication.shared().terminate(self)
+    }
+    
     func applicationDidFinishLaunching(_ aNotification: Notification) {
-        // Insert code here to initialize your application
+        let icon = NSImage(named: "status-icon")
+        icon?.isTemplate = true;
+        
+        statusItem.image = icon
+        statusItem.menu = statusMenu
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
