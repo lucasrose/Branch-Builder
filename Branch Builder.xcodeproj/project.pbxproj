@@ -13,6 +13,8 @@
 		08D4E7EB1D33E5DD003D7A25 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08D4E7E91D33E5DD003D7A25 /* MainMenu.xib */; };
 		08D4E7F61D33E5DD003D7A25 /* Branch_BuilderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D4E7F51D33E5DD003D7A25 /* Branch_BuilderTests.swift */; };
 		08D4E8011D33E5DD003D7A25 /* Branch_BuilderUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D4E8001D33E5DD003D7A25 /* Branch_BuilderUITests.swift */; };
+		08D8B1801D33FF2B00E463FD /* StatusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D8B17E1D33FF2B00E463FD /* StatusViewController.swift */; };
+		08D8B1811D33FF2B00E463FD /* StatusViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08D8B17F1D33FF2B00E463FD /* StatusViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,6 +47,8 @@
 		08D4E7FC1D33E5DD003D7A25 /* Branch BuilderUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Branch BuilderUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		08D4E8001D33E5DD003D7A25 /* Branch_BuilderUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Branch_BuilderUITests.swift; sourceTree = "<group>"; };
 		08D4E8021D33E5DD003D7A25 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		08D8B17E1D33FF2B00E463FD /* StatusViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatusViewController.swift; sourceTree = "<group>"; };
+		08D8B17F1D33FF2B00E463FD /* StatusViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StatusViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,6 +102,8 @@
 				08D4E7E21D33E5DD003D7A25 /* AppDelegate.swift */,
 				08D4E7E71D33E5DD003D7A25 /* Assets.xcassets */,
 				08D4E7E91D33E5DD003D7A25 /* MainMenu.xib */,
+				08D8B17E1D33FF2B00E463FD /* StatusViewController.swift */,
+				08D8B17F1D33FF2B00E463FD /* StatusViewController.xib */,
 				08D4E7EC1D33E5DD003D7A25 /* Info.plist */,
 				08D4E7E41D33E5DD003D7A25 /* Branch_Builder.xcdatamodeld */,
 			);
@@ -235,6 +241,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				08D8B1811D33FF2B00E463FD /* StatusViewController.xib in Resources */,
 				08D4E7E81D33E5DD003D7A25 /* Assets.xcassets in Resources */,
 				08D4E7EB1D33E5DD003D7A25 /* MainMenu.xib in Resources */,
 			);
@@ -262,6 +269,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				08D4E7E31D33E5DD003D7A25 /* AppDelegate.swift in Sources */,
+				08D8B1801D33FF2B00E463FD /* StatusViewController.swift in Sources */,
 				08D4E7E61D33E5DD003D7A25 /* Branch_Builder.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -496,6 +504,7 @@
 				08D4E8071D33E5DD003D7A25 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		08D4E8081D33E5DD003D7A25 /* Build configuration list for PBXNativeTarget "Branch BuilderTests" */ = {
 			isa = XCConfigurationList;
@@ -504,6 +513,7 @@
 				08D4E80A1D33E5DD003D7A25 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		08D4E80B1D33E5DD003D7A25 /* Build configuration list for PBXNativeTarget "Branch BuilderUITests" */ = {
 			isa = XCConfigurationList;
@@ -512,6 +522,7 @@
 				08D4E80D1D33E5DD003D7A25 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 

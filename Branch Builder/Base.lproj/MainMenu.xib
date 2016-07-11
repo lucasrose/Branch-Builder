@@ -14,6 +14,8 @@
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="Branch_Builder" customModuleProvider="target">
             <connections>
+                <outlet property="buildBranch" destination="T0q-af-01h" id="A1Z-iQ-1tV"/>
+                <outlet property="status" destination="n8o-R0-Ni9" id="Cs0-ZW-SeO"/>
                 <outlet property="statusMenu" destination="ck9-Dz-O3L" id="yI8-Fj-yea"/>
                 <outlet property="window" destination="QvC-M9-y7g" id="gIp-Ho-8D9"/>
             </connections>
@@ -29,17 +31,17 @@
                 <autoresizingMask key="autoresizingMask"/>
             </view>
         </window>
-        <menu id="ck9-Dz-O3L">
+        <menu autoenablesItems="NO" id="ck9-Dz-O3L">
             <items>
                 <menuItem title="Build Branch" keyEquivalent="B" id="T0q-af-01h">
                     <connections>
                         <action selector="buildBranchClicked:" target="Voe-Tx-rLC" id="TIJ-aj-h6P"/>
                     </connections>
                 </menuItem>
-                <menuItem title="About" id="n8o-R0-Ni9">
+                <menuItem title="Status" enabled="NO" id="n8o-R0-Ni9">
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <connections>
-                        <action selector="aboutClicked:" target="Voe-Tx-rLC" id="Z2A-zs-UrY"/>
+                        <action selector="statusClicked:" target="Voe-Tx-rLC" id="XHh-4o-U4w"/>
                     </connections>
                 </menuItem>
                 <menuItem title="Quit" id="4E1-yU-WZf">
@@ -50,5 +52,11 @@
             </items>
             <point key="canvasLocation" x="-16" y="-125"/>
         </menu>
+        <viewController id="YGf-Wg-rrH" userLabel="Popover View Controller" customClass="StatusViewController" customModule="Branch_Builder" customModuleProvider="target"/>
+        <popover id="N9A-8R-bwQ">
+            <connections>
+                <outlet property="contentViewController" destination="YGf-Wg-rrH" id="lwb-OY-k4f"/>
+            </connections>
+        </popover>
     </objects>
 </document>

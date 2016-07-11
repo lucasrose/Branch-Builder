@@ -10,34 +10,70 @@ import Cocoa
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
-
+    //MARK: Global Variables & Init
     @IBOutlet weak var window: NSWindow!
     @IBOutlet weak var statusMenu: NSMenu!
-
+    @IBOutlet weak var status: NSMenuItem!
+    @IBOutlet weak var buildBranch: NSMenuItem!
+    
+    let statusPopover = NSPopover()
     let statusItem = NSStatusBar.system().statusItem(withLength: NSVariableStatusItemLength)
     let ct = 0
     
+    //MARK: - IBAction Methods
+    
     @IBAction func buildBranchClicked(_ sender: NSMenuItem) {
-        let icon = NSImage(named: "status-icon-in-progress")
         
-        statusItem.image = icon
+        setStatusItemImage(iconName: "status-icon-in-progress")
+        
+        buildBranch.isEnabled = false //set to be enabled after callback from getting status results from jenkins
+        status.isEnabled = true
     }
     
-    @IBAction func aboutClicked(_ sender: NSMenuItem) {
+    @IBAction func statusClicked(_ sender: NSMenuItem) {
+        //Will set status to be clickable after callback response
+        //at the moment just make it display popover
+        //TODO
+        if (status.isEnabled) {
+            showPopover()
+        }
+        
+        //after the callback is finished we will set buildBranch to be enabled again
+        buildBranch.isEnabled = false //set to be enabled after callback from getting status results from jenkins
     }
     
     @IBAction func quitClicked(_ sender: AnyObject) {
         NSApplication.shared().terminate(self)
     }
     
-    func applicationDidFinishLaunching(_ aNotification: Notification) {
-        let icon = NSImage(named: "status-icon")
-        icon?.isTemplate = true;
+    //MARK: - Helper Methods
+    
+    func setStatusItemImage(iconName: String!){
+        let icon = NSImage(named: iconName)
         
         statusItem.image = icon
-        statusItem.menu = statusMenu
     }
-
+    
+    func showPopover() {
+        if let button = statusItem.button {
+            statusPopover.show(relativeTo: button.bounds, of: button, preferredEdge: NSRectEdge.minY)
+        }
+    }
+    
+    func setupPopover() {
+        statusPopover.contentViewController = StatusViewController(nibName: "StatusViewController", bundle: nil)
+        statusPopover.behavior = NSPopoverBehavior.transient
+    }
+    
+    //MARK: - Lifecycle Methods
+    
+    func applicationDidFinishLaunching(_ aNotification: Notification) {
+    
+        setupPopover()
+        statusItem.menu = statusMenu
+        setStatusItemImage(iconName: "status-icon")
+    }
+    
     func applicationWillTerminate(_ aNotification: Notification) {
         // Insert code here to tear down your application
     }
