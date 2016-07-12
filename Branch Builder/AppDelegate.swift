@@ -19,6 +19,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     let statusPopover = NSPopover()
     let statusItem = NSStatusBar.system().statusItem(withLength: NSVariableStatusItemLength)
     var branchName: String? = nil
+
     //MARK: - IBAction Methods
     
     @IBAction func buildBranchClicked(_ sender: NSMenuItem) {
@@ -26,6 +27,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         if branchName == nil {
             let branch = getBranchName()
             if branch != "" {
+                //do branch actions here
                 branchName = branch
             }
             else{
@@ -83,15 +85,20 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     func showPopover() {
         if let button = statusItem.button {
             statusPopover.animates = true
+            
             statusPopover.show(relativeTo: button.bounds, of: button, preferredEdge: NSRectEdge.minY)
         }
     }
     
     func setupPopover() {
-        
         statusPopover.contentViewController = StatusViewController(nibName: "StatusViewController", bundle: nil)
-        statusPopover.contentViewController?.setValue(branchName, forKey: "branch") //fix here <<<<<---------------
         statusPopover.behavior = NSPopoverBehavior.transient
+    }
+    
+    //MARK: Callbacks
+    
+    func updateTest(){
+        
     }
     
     //MARK: - Lifecycle Methods
@@ -101,10 +108,23 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         statusItem.menu = statusMenu
         setStatusItemImage(iconName: "status-icon")
         setupPopover()
+        
+        NSEvent.addLocalMonitorForEvents(matching: NSLeftMouseDownMask, handler: mouseClick);
+        NSEvent.addLocalMonitorForEvents(matching: NSRightMouseDownMask, handler: mouseClick);
+
     }
     
     func applicationWillTerminate(_ aNotification: Notification) {
         // Insert code here to tear down your application
+    }
+    
+    // MARK: Handlers
+    
+    func mouseClick(event: NSEvent!) -> NSEvent {
+        if (self.statusPopover.isShown){
+            self.statusPopover.performClose(event)
+        }
+        return event
     }
 
     // MARK: - Core Data stack

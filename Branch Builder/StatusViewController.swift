@@ -13,34 +13,53 @@ class StatusViewController: NSViewController, NSTableViewDelegate, NSTableViewDa
     @IBOutlet weak var tableView: NSTableView!
     
     @IBOutlet weak var branchName: NSTextField!
-    var branch: String? = nil
-    
-    let data = ["LINT-COMPILE", "PYTHON", "RUBY-LINT", "UNIT INTEGRATION", "BRANCH ACCEPTANCE", "DIST"]
+        
+    let tests = [
+        TestType.LINT_COMPILE,
+        TestType.PYTHON,
+        TestType.RUBY_LINT,
+        TestType.UNIT_INTEGRATION,
+        TestType.BRANCH_ACCEPTANCE,
+        TestType.DIST
+    ]
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print(branch)
+        setBranchName(name: "NEW BRANCH")
+        buildCurrentBranch(branch: branchName.stringValue)
+        
         tableView.dataSource = self
         tableView.delegate = self
+        
         tableView.reloadData()
     }
-
+    
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
         
-        //var image:NSImage?
         if let cell = tableView.make(withIdentifier: "TestNameCell", owner: nil) as? NSTableCellView {
-            cell.textField?.stringValue = data[row]
+            cell.textField?.stringValue = tests[row].rawValue
             setTestImage(cell: cell, iconName: "test-icon-in-progress")
             return cell
         }
         return nil
     }
     func numberOfRows(in tableView: NSTableView) -> Int {
-        return data.count
+        return tests.count
     }
     
     func setTestImage(cell: NSTableCellView, iconName: String!) {
         let icon = NSImage(named: iconName)
         cell.imageView?.image = icon
+    }
+    
+    //MARK: Helper Methods
+    
+    func setBranchName(name: String){
+        //get branch name by main popup
+        branchName.stringValue = name
+    }
+    
+    func buildCurrentBranch(branch: String){
+        //API CALL HERE
     }
 }

@@ -7,14 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0806920B1D3541A90034BF7C /* TestType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0806920A1D3541A90034BF7C /* TestType.swift */; };
+		0806920C1D3544880034BF7C /* StatusViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08D8B17F1D33FF2B00E463FD /* StatusViewController.xib */; };
+		0806920E1D3544DD0034BF7C /* StatusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D8B17E1D33FF2B00E463FD /* StatusViewController.swift */; };
 		08D4E7E31D33E5DD003D7A25 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D4E7E21D33E5DD003D7A25 /* AppDelegate.swift */; };
 		08D4E7E61D33E5DD003D7A25 /* Branch_Builder.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 08D4E7E41D33E5DD003D7A25 /* Branch_Builder.xcdatamodeld */; };
 		08D4E7E81D33E5DD003D7A25 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 08D4E7E71D33E5DD003D7A25 /* Assets.xcassets */; };
 		08D4E7EB1D33E5DD003D7A25 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08D4E7E91D33E5DD003D7A25 /* MainMenu.xib */; };
 		08D4E7F61D33E5DD003D7A25 /* Branch_BuilderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D4E7F51D33E5DD003D7A25 /* Branch_BuilderTests.swift */; };
 		08D4E8011D33E5DD003D7A25 /* Branch_BuilderUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D4E8001D33E5DD003D7A25 /* Branch_BuilderUITests.swift */; };
-		08D8B1801D33FF2B00E463FD /* StatusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D8B17E1D33FF2B00E463FD /* StatusViewController.swift */; };
-		08D8B1811D33FF2B00E463FD /* StatusViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08D8B17F1D33FF2B00E463FD /* StatusViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,6 +36,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0806920A1D3541A90034BF7C /* TestType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestType.swift; sourceTree = "<group>"; };
 		08D4E7DF1D33E5DD003D7A25 /* Branch Builder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Branch Builder.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		08D4E7E21D33E5DD003D7A25 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		08D4E7E51D33E5DD003D7A25 /* Branch_Builder.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Branch_Builder.xcdatamodel; sourceTree = "<group>"; };
@@ -103,6 +105,7 @@
 				08D4E7E71D33E5DD003D7A25 /* Assets.xcassets */,
 				08D4E7E91D33E5DD003D7A25 /* MainMenu.xib */,
 				08D8B17E1D33FF2B00E463FD /* StatusViewController.swift */,
+				0806920A1D3541A90034BF7C /* TestType.swift */,
 				08D8B17F1D33FF2B00E463FD /* StatusViewController.xib */,
 				08D4E7EC1D33E5DD003D7A25 /* Info.plist */,
 				08D4E7E41D33E5DD003D7A25 /* Branch_Builder.xcdatamodeld */,
@@ -241,7 +244,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				08D8B1811D33FF2B00E463FD /* StatusViewController.xib in Resources */,
+				0806920C1D3544880034BF7C /* StatusViewController.xib in Resources */,
 				08D4E7E81D33E5DD003D7A25 /* Assets.xcassets in Resources */,
 				08D4E7EB1D33E5DD003D7A25 /* MainMenu.xib in Resources */,
 			);
@@ -268,9 +271,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0806920E1D3544DD0034BF7C /* StatusViewController.swift in Sources */,
 				08D4E7E31D33E5DD003D7A25 /* AppDelegate.swift in Sources */,
-				08D8B1801D33FF2B00E463FD /* StatusViewController.swift in Sources */,
 				08D4E7E61D33E5DD003D7A25 /* Branch_Builder.xcdatamodeld in Sources */,
+				0806920B1D3541A90034BF7C /* TestType.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

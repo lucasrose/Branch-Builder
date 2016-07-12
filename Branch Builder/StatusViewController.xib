@@ -58,7 +58,7 @@
                                                     </imageView>
                                                     <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" allowsExpansionToolTips="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GPk-gX-G3K">
                                                         <rect key="frame" x="28" y="3" width="134" height="18"/>
-                                                        <textFieldCell key="cell" lineBreakMode="truncatingTail" enabled="NO" sendsActionOnEndEditing="YES" title="TEST NAME" placeholderString="CELL" id="IsJ-qd-6L4" customClass="JenkinsTestCell">
+                                                        <textFieldCell key="cell" lineBreakMode="truncatingTail" enabled="NO" sendsActionOnEndEditing="YES" title="TEST NAME" placeholderString="CELL" id="IsJ-qd-6L4" >
                                                             <font key="font" size="12" name="SFUIText-Light"/>
                                                             <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
