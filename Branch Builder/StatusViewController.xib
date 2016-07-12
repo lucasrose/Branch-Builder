@@ -58,7 +58,7 @@
                                                     </imageView>
                                                     <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" allowsExpansionToolTips="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GPk-gX-G3K">
                                                         <rect key="frame" x="28" y="3" width="134" height="18"/>
-                                                        <textFieldCell key="cell" lineBreakMode="truncatingTail" enabled="NO" sendsActionOnEndEditing="YES" title="TEST NAME" placeholderString="CELL" id="IsJ-qd-6L4" >
+                                                        <textFieldCell key="cell" lineBreakMode="truncatingTail" enabled="NO" sendsActionOnEndEditing="YES" title="TEST NAME" placeholderString="CELL" id="IsJ-qd-6L4">
                                                             <font key="font" size="12" name="SFUIText-Light"/>
                                                             <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -104,7 +104,7 @@
                     <constraints>
                         <constraint firstAttribute="height" constant="24" id="PL1-o0-OQK"/>
                     </constraints>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="BRANCH NAME" id="WIA-ve-Z8o">
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="BRANCH NAME" id="WIA-ve-Z8o">
                         <font key="font" size="14" name="SFUIText-Bold"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>

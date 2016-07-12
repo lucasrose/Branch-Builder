@@ -13,7 +13,7 @@ class StatusViewController: NSViewController, NSTableViewDelegate, NSTableViewDa
     @IBOutlet weak var tableView: NSTableView!
     
     @IBOutlet weak var branchName: NSTextField!
-        
+    
     let tests = [
         TestType.LINT_COMPILE,
         TestType.PYTHON,
@@ -56,10 +56,15 @@ class StatusViewController: NSViewController, NSTableViewDelegate, NSTableViewDa
     
     func setBranchName(name: String){
         //get branch name by main popup
-        branchName.stringValue = name
+        branchName.stringValue = getAppDelegate().branchName!
     }
     
     func buildCurrentBranch(branch: String){
         //API CALL HERE
+    }
+    
+    func getAppDelegate() -> AppDelegate {
+        let appDelegate = NSApplication.shared().delegate as! AppDelegate
+        return appDelegate
     }
 }
