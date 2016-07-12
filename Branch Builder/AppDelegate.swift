@@ -11,6 +11,7 @@ import Cocoa
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
     //MARK: Global Variables & Init
+    
     @IBOutlet weak var window: NSWindow!
     @IBOutlet weak var statusMenu: NSMenu!
     @IBOutlet weak var status: NSMenuItem!
@@ -18,7 +19,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     let statusPopover = NSPopover()
     let statusItem = NSStatusBar.system().statusItem(withLength: NSVariableStatusItemLength)
+    
     var branchName: String? = nil
+    var eventMonitor: EventMonitor?
 
     //MARK: - IBAction Methods
     
@@ -88,11 +91,25 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             
             statusPopover.show(relativeTo: button.bounds, of: button, preferredEdge: NSRectEdge.minY)
         }
+        eventMonitor?.start()
     }
     
     func setupPopover() {
         statusPopover.contentViewController = StatusViewController(nibName: "StatusViewController", bundle: nil)
         statusPopover.behavior = NSPopoverBehavior.transient
+    }
+    
+    func closePopover(event: NSEvent) {
+        statusPopover.performClose(event)
+        eventMonitor?.stop()
+    }
+    
+    func setupEventMonitor() {
+        eventMonitor = EventMonitor(mask: [NSLeftMouseDownMask, NSRightMouseDownMask]){ event in
+            if self.statusPopover.isShown {
+                self.closePopover(event: event!)
+            }
+        }
     }
     
     //MARK: Callbacks
@@ -109,24 +126,15 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         setStatusItemImage(iconName: "status-icon")
         setupPopover()
         
-        NSEvent.addLocalMonitorForEvents(matching: NSLeftMouseDownMask, handler: mouseClick);
-        NSEvent.addLocalMonitorForEvents(matching: NSRightMouseDownMask, handler: mouseClick);
-
+        setupEventMonitor()
+        eventMonitor?.start()
     }
     
     func applicationWillTerminate(_ aNotification: Notification) {
         // Insert code here to tear down your application
     }
     
-    // MARK: Handlers
     
-    func mouseClick(event: NSEvent!) -> NSEvent {
-        if (self.statusPopover.isShown){
-            self.statusPopover.performClose(event)
-        }
-        return event
-    }
-
     // MARK: - Core Data stack
 
     lazy var applicationDocumentsDirectory: Foundation.URL = {

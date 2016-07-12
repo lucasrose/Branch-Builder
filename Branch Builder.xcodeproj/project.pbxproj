@@ -10,6 +10,7 @@
 		0806920B1D3541A90034BF7C /* TestType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0806920A1D3541A90034BF7C /* TestType.swift */; };
 		0806920C1D3544880034BF7C /* StatusViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08D8B17F1D33FF2B00E463FD /* StatusViewController.xib */; };
 		0806920E1D3544DD0034BF7C /* StatusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D8B17E1D33FF2B00E463FD /* StatusViewController.swift */; };
+		080692101D35471A0034BF7C /* EventMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0806920F1D35471A0034BF7C /* EventMonitor.swift */; };
 		08D4E7E31D33E5DD003D7A25 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D4E7E21D33E5DD003D7A25 /* AppDelegate.swift */; };
 		08D4E7E61D33E5DD003D7A25 /* Branch_Builder.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 08D4E7E41D33E5DD003D7A25 /* Branch_Builder.xcdatamodeld */; };
 		08D4E7E81D33E5DD003D7A25 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 08D4E7E71D33E5DD003D7A25 /* Assets.xcassets */; };
@@ -37,6 +38,7 @@
 
 /* Begin PBXFileReference section */
 		0806920A1D3541A90034BF7C /* TestType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestType.swift; sourceTree = "<group>"; };
+		0806920F1D35471A0034BF7C /* EventMonitor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventMonitor.swift; sourceTree = "<group>"; };
 		08D4E7DF1D33E5DD003D7A25 /* Branch Builder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Branch Builder.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		08D4E7E21D33E5DD003D7A25 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		08D4E7E51D33E5DD003D7A25 /* Branch_Builder.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Branch_Builder.xcdatamodel; sourceTree = "<group>"; };
@@ -102,6 +104,7 @@
 			isa = PBXGroup;
 			children = (
 				08D4E7E21D33E5DD003D7A25 /* AppDelegate.swift */,
+				0806920F1D35471A0034BF7C /* EventMonitor.swift */,
 				08D4E7E71D33E5DD003D7A25 /* Assets.xcassets */,
 				08D4E7E91D33E5DD003D7A25 /* MainMenu.xib */,
 				08D8B17E1D33FF2B00E463FD /* StatusViewController.swift */,
@@ -272,6 +275,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0806920E1D3544DD0034BF7C /* StatusViewController.swift in Sources */,
+				080692101D35471A0034BF7C /* EventMonitor.swift in Sources */,
 				08D4E7E31D33E5DD003D7A25 /* AppDelegate.swift in Sources */,
 				08D4E7E61D33E5DD003D7A25 /* Branch_Builder.xcdatamodeld in Sources */,
 				0806920B1D3541A90034BF7C /* TestType.swift in Sources */,
