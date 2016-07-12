@@ -20,24 +20,15 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     let statusPopover = NSPopover()
     let statusItem = NSStatusBar.system().statusItem(withLength: NSVariableStatusItemLength)
     
-    var branchName: String? = nil
+    var branchName: String!
     var eventMonitor: EventMonitor?
     
     //MARK: - IBAction Methods
     
     @IBAction func buildBranchClicked(_ sender: NSMenuItem) {
-        //define branch name to be using for build
-        if branchName == nil {
-            let branch = getBranchName()
-            if branch != "" {
-                //try to do branch actions here
-                branchName = branch
-            }
-            else{
-                return;
-            }
+        branchName = getBranchName()
+        //try to do branch actions
             
-        }
         setStatusItemImage(iconName: "status-icon-in-progress")
         
         buildBranch.isEnabled = false //set to be enabled after callback from getting status results from jenkins
@@ -68,7 +59,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         let inputName = NSAlert()
         let inputText = NSTextField(frame: NSRect(x: 0, y: 0, width: 200, height: 24))
         
-        inputText.stringValue = ""
+        inputText.stringValue = branchName
         
         inputName.messageText = "Enter Branch Name:"
         inputName.addButton(withTitle: "Done")
@@ -123,6 +114,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         
         statusItem.menu = statusMenu
+        branchName = ""
         setStatusItemImage(iconName: "status-icon")
         setupPopover()
         
