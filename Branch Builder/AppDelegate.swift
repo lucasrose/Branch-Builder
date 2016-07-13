@@ -13,6 +13,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     //MARK: Global Variables & Init
     
     @IBOutlet weak var window: NSWindow!
+    @IBOutlet weak var inputUsername: NSTextField!
+    @IBOutlet weak var inputPassword: NSTextField!
     @IBOutlet weak var statusMenu: NSMenu!
     @IBOutlet weak var status: NSMenuItem!
     @IBOutlet weak var buildBranch: NSMenuItem!
@@ -24,11 +26,15 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     var eventMonitor: EventMonitor?
     
     //MARK: - IBAction Methods
+    @IBAction func loginCompleted(_ sender: AnyObject) {
+        //window?.setIsVisible(false)
+    }
     
     @IBAction func buildBranchClicked(_ sender: NSMenuItem) {
+        
         branchName = getBranchName()
         //try to do branch actions
-            
+        
         setStatusItemImage(iconName: "status-icon-in-progress")
         
         buildBranch.isEnabled = false //set to be enabled after callback from getting status results from jenkins
@@ -39,6 +45,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         //Will set status to be clickable after callback response
         //at the moment just make it display popover
         //TODO
+        let test = JenkinsRequest()
+        test.buildBranch()
+        
         if status.isEnabled {
             showPopover()
             
@@ -58,7 +67,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         //Create popup to enter branch name
         let inputName = NSAlert()
         let inputText = NSTextField(frame: NSRect(x: 0, y: 0, width: 200, height: 24))
-        
         inputText.stringValue = branchName
         
         inputName.messageText = "Enter Branch Name:"
@@ -112,14 +120,16 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     //MARK: - Lifecycle Methods
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
-        
         statusItem.menu = statusMenu
-        branchName = ""
         setStatusItemImage(iconName: "status-icon")
+        branchName = ""
         setupPopover()
         
         setupEventMonitor()
         eventMonitor?.start()
+//        window?.setIsVisible(true)
+        //if flag exists in core data set invisible, otherwise set visible
+        //window.setIsVisible(true)
     }
     
     func applicationWillTerminate(_ aNotification: Notification) {
