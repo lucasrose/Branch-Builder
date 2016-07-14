@@ -24,6 +24,7 @@
         </customObject>
         <customObject id="YLy-65-1bz" customClass="NSFontManager"/>
         <window title="Branch Builder" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" hidesOnDeactivate="YES" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="QvC-M9-y7g">
+            <windowStyleMask key="styleMask" titled="YES"/>
             <windowPositionMask key="initialPositionMask" topStrut="YES"/>
             <rect key="contentRect" x="335" y="530" width="350" height="161"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1440" height="877"/>
@@ -82,6 +83,9 @@
                             <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
+                        <connections>
+                            <outlet property="nextKeyView" destination="R58-0Z-b9e" id="Fgx-K3-4Sm"/>
+                        </connections>
                     </textField>
                     <secureTextField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="R58-0Z-b9e">
                         <rect key="frame" x="172" y="46" width="96" height="22"/>
@@ -93,6 +97,9 @@
                                 <string>NSAllRomanInputSourcesLocaleIdentifier</string>
                             </allowedInputSourceLocales>
                         </secureTextFieldCell>
+                        <connections>
+                            <outlet property="nextKeyView" destination="EiT-Mj-1SZ" id="15w-W0-WhK"/>
+                        </connections>
                     </secureTextField>
                 </subviews>
                 <constraints>

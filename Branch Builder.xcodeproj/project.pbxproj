@@ -11,7 +11,6 @@
 		0806920C1D3544880034BF7C /* StatusViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08D8B17F1D33FF2B00E463FD /* StatusViewController.xib */; };
 		0806920E1D3544DD0034BF7C /* StatusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D8B17E1D33FF2B00E463FD /* StatusViewController.swift */; };
 		080692101D35471A0034BF7C /* EventMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0806920F1D35471A0034BF7C /* EventMonitor.swift */; };
-		080C91AE1D358E3A006E1EA0 /* JenkinsRequest.js in Resources */ = {isa = PBXBuildFile; fileRef = 080C91AD1D358E3A006E1EA0 /* JenkinsRequest.js */; };
 		080C91B01D358E50006E1EA0 /* JenkinsRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080C91AF1D358E50006E1EA0 /* JenkinsRequest.swift */; };
 		081C1B6F1D36C61600A820CB /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081C1B6E1D36C61600A820CB /* HTTPMethod.swift */; };
 		08D4E7E31D33E5DD003D7A25 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D4E7E21D33E5DD003D7A25 /* AppDelegate.swift */; };
@@ -42,7 +41,6 @@
 /* Begin PBXFileReference section */
 		0806920A1D3541A90034BF7C /* TestType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestType.swift; sourceTree = "<group>"; };
 		0806920F1D35471A0034BF7C /* EventMonitor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventMonitor.swift; sourceTree = "<group>"; };
-		080C91AD1D358E3A006E1EA0 /* JenkinsRequest.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = JenkinsRequest.js; sourceTree = "<group>"; };
 		080C91AF1D358E50006E1EA0 /* JenkinsRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JenkinsRequest.swift; sourceTree = "<group>"; };
 		081C1B6E1D36C61600A820CB /* HTTPMethod.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
 		08D4E7DF1D33E5DD003D7A25 /* Branch Builder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Branch Builder.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -86,14 +84,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		080C91AC1D358E18006E1EA0 /* js */ = {
-			isa = PBXGroup;
-			children = (
-				080C91AD1D358E3A006E1EA0 /* JenkinsRequest.js */,
-			);
-			name = js;
-			sourceTree = "<group>";
-		};
 		08D4E7D61D33E5DD003D7A25 = {
 			isa = PBXGroup;
 			children = (
@@ -117,7 +107,6 @@
 		08D4E7E11D33E5DD003D7A25 /* Branch Builder */ = {
 			isa = PBXGroup;
 			children = (
-				080C91AC1D358E18006E1EA0 /* js */,
 				08D4E7E21D33E5DD003D7A25 /* AppDelegate.swift */,
 				0806920F1D35471A0034BF7C /* EventMonitor.swift */,
 				080C91AF1D358E50006E1EA0 /* JenkinsRequest.swift */,
@@ -267,7 +256,6 @@
 				0806920C1D3544880034BF7C /* StatusViewController.xib in Resources */,
 				08D4E7E81D33E5DD003D7A25 /* Assets.xcassets in Resources */,
 				08D4E7EB1D33E5DD003D7A25 /* MainMenu.xib in Resources */,
-				080C91AE1D358E3A006E1EA0 /* JenkinsRequest.js in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -21,21 +21,22 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     let statusPopover = NSPopover()
     let statusItem = NSStatusBar.system().statusItem(withLength: NSVariableStatusItemLength)
-    
+    let test = JenkinsRequest()
     var branchName: String!
     var eventMonitor: EventMonitor?
     
     //MARK: - IBAction Methods
     @IBAction func loginCompleted(_ sender: AnyObject) {
-        //window?.setIsVisible(false)
+        window?.setIsVisible(false)
+        test.setUser(user: inputUsername.stringValue, pass: inputPassword.stringValue)
     }
     
     @IBAction func buildBranchClicked(_ sender: NSMenuItem) {
         
         branchName = getBranchName()
         //try to do branch actions
-        let test = JenkinsRequest()
-        test.buildBranch(name: branchName)
+        //test.buildBranch(name: branchName)
+        test.getLastBuild()
         
         setStatusItemImage(iconName: "status-icon-in-progress")
         
@@ -127,8 +128,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         
         setupEventMonitor()
         eventMonitor?.start()
-        
-//        window?.setIsVisible(true)
+
+        window?.setIsVisible(true)
         //if flag exists in core data set invisible, otherwise set visible
         //window.setIsVisible(true)
     }
@@ -245,7 +246,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     func applicationShouldTerminate(_ sender: NSApplication) -> NSApplicationTerminateReply {
         // Save changes in the application's managed object context before the application terminates.
-        
         if !managedObjectContext.commitEditing() {
             NSLog("\(NSStringFromClass(self.dynamicType)) unable to commit editing to terminate")
             return .terminateCancel
