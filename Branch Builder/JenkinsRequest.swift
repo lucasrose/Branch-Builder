@@ -30,44 +30,40 @@ class JenkinsRequest: NSObject, URLSessionDelegate {
     // MARK: Functions
     
     func buildBranch(name: String) {
-        setBuildString(branch: name)
-        let encodedURL: URL! = encodeUrl(name: buildString)
-        
-        let config = getConfigurationWithCredentials()
-        
-        var request = URLRequest(url: encodedURL)
-        request.httpMethod = HTTPMethod.POST.rawValue
-        
-        let session = URLSession.init(configuration: config)
-        
-        let task = session.dataTask(with: request) {
-            (data, response, error) in
-            
-            guard error == nil else {
-                print("error\(error)")
-                return
-            }
-            
-            if let httpStatus = response as? HTTPURLResponse{
-                if httpStatus.statusCode != 200 {
-                    print("Status Code =\(httpStatus.statusCode)")
-                    print("Response = \(response)")
-                }
-            }
-            
-            let str = NSString(data: data!, encoding: String.Encoding.utf8.rawValue)
-            print(str)
-        }
-        
-        task.resume()
+//        let encodedURL: URL! = encodeUrlWithBranch(name: name)
+//        
+//        let config = getConfigurationWithCredentials()
+//        var request = URLRequest(url: encodedURL)
+//        request.httpMethod = HTTPMethod.POST.rawValue
+//        
+//        let session = URLSession.init(configuration: config)
+//        
+//        let task = session.dataTask(with: request) {
+//            (data, response, error) in
+//            
+//            guard error == nil else {
+//                print("error\(error)")
+//                return
+//            }
+//            
+//            if let httpStatus = response as? HTTPURLResponse{
+//                if httpStatus.statusCode != 200 {
+//                    print("Status Code =\(httpStatus.statusCode)")
+//                    print("Response = \(response)")
+//                }
+//            }
+//            
+//            let str = NSString(data: data!, encoding: String.Encoding.utf8.rawValue)
+//            print(str)
+//        }
+//        
+//        task.resume()
+        print("Built:", name)
     }
     
-    func setBuildString(branch: String) {
-        buildString = buildString.appending(branch)
-    }
-    
-    func encodeUrl(name: String) -> URL! {
-        return URL(string: name.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)!)
+    func encodeUrlWithBranch(name: String) -> URL! {
+        buildString = buildString.appending(name)
+        return URL(string: buildString.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)!)
     }
     
     func getConfigurationWithCredentials() -> URLSessionConfiguration {

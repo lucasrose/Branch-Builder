@@ -34,6 +34,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         
         branchName = getBranchName()
         //try to do branch actions
+        let test = JenkinsRequest()
+        test.buildBranch(name: branchName)
         
         setStatusItemImage(iconName: "status-icon-in-progress")
         
@@ -125,9 +127,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         
         setupEventMonitor()
         eventMonitor?.start()
-        
-        let test = JenkinsRequest()
-        test.buildBranch(name: "hack-week/mac-branch-builder")
         
 //        window?.setIsVisible(true)
         //if flag exists in core data set invisible, otherwise set visible
