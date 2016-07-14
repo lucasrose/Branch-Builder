@@ -27,7 +27,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     //MARK: - IBAction Methods
     @IBAction func loginCompleted(_ sender: AnyObject) {
-        window?.setIsVisible(false)
+        window.close()
         test.setUser(user: inputUsername.stringValue, pass: inputPassword.stringValue)
     }
     
@@ -128,10 +128,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         
         setupEventMonitor()
         eventMonitor?.start()
-
-        window?.setIsVisible(true)
-        //if flag exists in core data set invisible, otherwise set visible
-        //window.setIsVisible(true)
     }
     
     func applicationWillTerminate(_ aNotification: Notification) {

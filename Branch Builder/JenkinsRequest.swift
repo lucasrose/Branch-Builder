@@ -73,7 +73,7 @@ class JenkinsRequest: NSObject, URLSessionDelegate {
             let str = NSString(data: data!, encoding: String.Encoding.utf8.rawValue)
             
             do {
-                let json = try JSONSerialization.jsonObject(with: data!, options: JSONSerialization.ReadingOptions.allowFragments)
+                let json = try JSONSerialization.jsonObject(with: data!, options: JSONSerialization.ReadingOptions.allowFragments) as? [String: AnyObject]
                 print(json)
             }
             catch _ {

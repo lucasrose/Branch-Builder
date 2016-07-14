@@ -23,7 +23,7 @@
             </connections>
         </customObject>
         <customObject id="YLy-65-1bz" customClass="NSFontManager"/>
-        <window title="Branch Builder" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" hidesOnDeactivate="YES" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="QvC-M9-y7g">
+        <window title="Branch Builder" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" hidesOnDeactivate="YES" releasedWhenClosed="NO" animationBehavior="default" id="QvC-M9-y7g">
             <windowStyleMask key="styleMask" titled="YES"/>
             <windowPositionMask key="initialPositionMask" topStrut="YES"/>
             <rect key="contentRect" x="335" y="530" width="350" height="161"/>
@@ -63,9 +63,12 @@
                         <buttonCell key="cell" type="push" title="DONE" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="FCA-dS-lVF">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" size="12" name="SFUIText-Light"/>
+                            <string key="keyEquivalent" base64-UTF8="YES">
+DQ
+</string>
                         </buttonCell>
                         <connections>
-                            <action selector="loginCompleted:" target="Voe-Tx-rLC" id="QWZ-vw-tZ9"/>
+                            <action selector="loginCompleted:" target="Voe-Tx-rLC" id="gct-8D-Dtn"/>
                         </connections>
                     </button>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="i31-BX-7RB">
@@ -98,7 +101,7 @@
                             </allowedInputSourceLocales>
                         </secureTextFieldCell>
                         <connections>
-                            <outlet property="nextKeyView" destination="EiT-Mj-1SZ" id="15w-W0-WhK"/>
+                            <outlet property="nextKeyView" destination="EiT-Mj-1SZ" id="377-ES-i7U"/>
                         </connections>
                     </secureTextField>
                 </subviews>
@@ -122,6 +125,9 @@
                     <constraint firstItem="i31-BX-7RB" firstAttribute="top" secondItem="kiw-Gc-F4e" secondAttribute="bottom" constant="19" id="v7D-aC-vRd"/>
                 </constraints>
             </view>
+            <connections>
+                <outlet property="initialFirstResponder" destination="HBJ-yH-xWN" id="UxB-FI-Ija"/>
+            </connections>
             <point key="canvasLocation" x="74" y="61.5"/>
         </window>
         <menu autoenablesItems="NO" id="ck9-Dz-O3L">
