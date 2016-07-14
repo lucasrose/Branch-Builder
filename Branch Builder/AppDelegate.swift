@@ -45,8 +45,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         //Will set status to be clickable after callback response
         //at the moment just make it display popover
         //TODO
-        let test = JenkinsRequest()
-        test.buildBranch()
         
         if status.isEnabled {
             showPopover()
@@ -127,6 +125,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         
         setupEventMonitor()
         eventMonitor?.start()
+        
+        let test = JenkinsRequest()
+        test.buildBranch(name: "hack-week/mac-branch-builder")
+        
 //        window?.setIsVisible(true)
         //if flag exists in core data set invisible, otherwise set visible
         //window.setIsVisible(true)

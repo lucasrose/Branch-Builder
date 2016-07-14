@@ -11,37 +11,41 @@ import Cocoa
 import JavaScriptCore
 
 
-class JenkinsRequest {
+class JenkinsRequest: NSObject, URLSessionDelegate {
     // MARK: Global Variables //?BRANCH=hack-week/mac-branch-builder
 
-    private let url: URL! = URL(string: "https://jenkins.reach.rackspace.com/job/Reach_Branch/")
-    private let buildBranchUrl: URL! = URL(string: "https://jenkins.reach.rackspace.com/job/Reach_Branch/buildWithParameters/")
+    private let hostString: String! = "https://jenkins.reach.rackspace.com/job/Reach_Branch/"
+    private var buildString: String!
     private let username: String! = ""
     private let password: String! = ""
-    private let branchName: String! = "hack-week/mac-branch-builder"
+    private var branchName: String!
 
     // MARK: Initialization
     
-    init(){
-        
+    override init(){
+        super.init()
+        buildString = hostString.appending("buildWithParameters?BRANCH=")
     }
     
     // MARK: Functions
     
-    func buildBranch() {
+    func buildBranch(name: String) {
+        branchName = name
+        buildString = buildString.appending(branchName)
+        
+        let encodedURL: String! = buildString.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)
+
         let login = String(format: "%@:%@", username, password)
         let loginData = login.data(using: String.Encoding.utf8)
         let base64EncodedCredential = loginData!.base64EncodedString()
-        let base64LoginString = "Basic \(base64EncodedCredential)"
-        let parameters = "BRANCH=\(branchName)"
-        var request = URLRequest(url: buildBranchUrl)
+        let headers = ["Authorization": "Basic \(base64EncodedCredential)"]
+        let config = URLSessionConfiguration.default
+        config.httpAdditionalHeaders = headers
         
-        request.setValue(base64LoginString, forHTTPHeaderField: "Authorization")
-        request.httpMethod = HTTPMethod.POST.rawValue
-        request.httpBody = parameters.data(using: String.Encoding.utf8)
+        var request = URLRequest(url: URL(string: encodedURL)!)
+                request.httpMethod = HTTPMethod.POST.rawValue
         
-        
-        let session = URLSession()
+        let session = URLSession.init(configuration: config)
         
         let task = session.dataTask(with: request) {
             (data, response, error) in
