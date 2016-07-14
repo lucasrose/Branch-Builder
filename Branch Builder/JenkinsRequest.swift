@@ -30,20 +30,13 @@ class JenkinsRequest: NSObject, URLSessionDelegate {
     // MARK: Functions
     
     func buildBranch(name: String) {
-        branchName = name
-        buildString = buildString.appending(branchName)
+        setBuildString(branch: name)
+        let encodedURL: URL! = encodeUrl(name: buildString)
         
-        let encodedURL: String! = buildString.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)
-
-        let login = String(format: "%@:%@", username, password)
-        let loginData = login.data(using: String.Encoding.utf8)
-        let base64EncodedCredential = loginData!.base64EncodedString()
-        let headers = ["Authorization": "Basic \(base64EncodedCredential)"]
-        let config = URLSessionConfiguration.default
-        config.httpAdditionalHeaders = headers
+        let config = getConfigurationWithCredentials()
         
-        var request = URLRequest(url: URL(string: encodedURL)!)
-                request.httpMethod = HTTPMethod.POST.rawValue
+        var request = URLRequest(url: encodedURL)
+        request.httpMethod = HTTPMethod.POST.rawValue
         
         let session = URLSession.init(configuration: config)
         
@@ -67,7 +60,27 @@ class JenkinsRequest: NSObject, URLSessionDelegate {
         }
         
         task.resume()
+    }
+    
+    func setBuildString(branch: String) {
+        buildString = buildString.appending(branch)
+    }
+    
+    func encodeUrl(name: String) -> URL! {
+        return URL(string: name.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)!)
+    }
+    
+    func getConfigurationWithCredentials() -> URLSessionConfiguration {
+        let login = String(format: "%@:%@", username, password)
+        let loginData = login.data(using: String.Encoding.utf8)
         
+        let base64EncodedCredential = loginData!.base64EncodedString()
+        let headers = ["Authorization": "Basic \(base64EncodedCredential)"]
+        
+        let config = URLSessionConfiguration.default
+        config.httpAdditionalHeaders = headers
+        
+        return config
     }
     
 }
