@@ -107,12 +107,10 @@ class JenkinsRequest: NSObject, URLSessionDelegate {
             
             let json = JSON(data: data!)
             
-            
             switch(requestType) {
             case .BUILD_BRANCH:
-                if let queueNumber = json["queueId"].number {
-                    completion(queueNumber.stringValue)
-                    //                print(queueNumber)
+                if let queueLocation = json["Location"].string {
+                    completion(queueLocation)
                 }
                 break
             case .GET_BUILD_INFORMATION:

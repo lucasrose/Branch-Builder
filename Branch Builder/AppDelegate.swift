@@ -34,10 +34,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     @IBAction func buildBranchClicked(_ sender: NSMenuItem) {
         
         getBranchName()
-        //build branch -> returns build number
-//        request.buildBranch(name: branchName)
-        //buildThisBranch()
-        getBuildInformation()
+        
+        buildThisBranch()
         //get build status(enter test type)
         setStatusItemImage(iconName: "status-icon-in-progress")
         
@@ -49,10 +47,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         //Will set status to be clickable after callback response
         //at the moment just make it display popover
         //TODO
-        
+
         if status.isEnabled {
             showPopover()
-            
         }
         
         //after the callback is finished we will set buildBranch to be enabled again
@@ -81,16 +78,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
     func buildThisBranch() {
-//        var locked = true
         request.buildBranch(name: branchName) { queueID in
             self.request.setQueueId(id: Int(queueID as! String)!)
             self.getBuildInformation()
-//            locked = false
+//            print(queueID)
         }
-        
-//        while(locked){
-//            wait()
-//        }
     }
     
     func getBuildInformation() {
