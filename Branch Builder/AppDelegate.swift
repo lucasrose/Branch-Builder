@@ -21,22 +21,23 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     let statusPopover = NSPopover()
     let statusItem = NSStatusBar.system().statusItem(withLength: NSVariableStatusItemLength)
-    let test = JenkinsRequest()
+    let request = JenkinsRequest()
     var branchName: String!
     var eventMonitor: EventMonitor?
     
     //MARK: - IBAction Methods
     @IBAction func loginCompleted(_ sender: AnyObject) {
         window.close()
-        test.setUser(user: inputUsername.stringValue, pass: inputPassword.stringValue)
+        request.setUser(user: inputUsername.stringValue, pass: inputPassword.stringValue)
     }
     
     @IBAction func buildBranchClicked(_ sender: NSMenuItem) {
         
         branchName = getBranchName()
-        //try to do branch actions
-        //test.buildBranch(name: branchName)
-        test.getLastBuild()
+        //build branch -> returns build number
+//        request.buildBranch(name: branchName)
+        request.getCurrentBuildNumber()
+        //get build status(enter test type)
         
         setStatusItemImage(iconName: "status-icon-in-progress")
         

@@ -18,16 +18,17 @@ class JenkinsRequest: NSObject, URLSessionDelegate {
     private var buildString: String!
     private var username: String! = ""
     private var password: String! = ""
-    private var branchName: String!
+    private var branchName: String! = ""
     private var config: URLSessionConfiguration!
     private var session: URLSession!
+    private var queueID: Int!
+    private var buildNumber: Int!
 
     // MARK: Initialization
     
     override init(){
         super.init()
         buildString = hostString.appending("buildWithParameters?BRANCH=")
-
     }
     
     // MARK: Functions
@@ -40,21 +41,47 @@ class JenkinsRequest: NSObject, URLSessionDelegate {
         session = URLSession.init(configuration: config)
     }
     
-    func getLastBuild() {
-        let encodedURL: URL! = encodeURL(name: lastBuild)
-        let request: URLRequest! = createRequest(url: encodedURL, method: HTTPMethod.GET)
+    func buildBranch(name: String) {
+        branchName = name
+        let branchBuild = buildString.appending(name)
         
-        createTask(request: request)
+        let encodedURL: URL! = encodeURL(name: branchBuild)
+        
+        let request: URLRequest! = createRequest(url: encodedURL, method: HTTPType.POST)
+        
+        createTask(request: request, requestType: RequestType.BUILD)
+        
+        //make sure our build has started (poll for matching queue ids, then when matched we will use that json to get build number)
+        
     }
     
-    func createRequest(url: URL!, method: HTTPMethod) -> URLRequest! {
+    func getBuildNumber() -> Int {
+        return buildNumber
+    }
+    
+    func getStatusOfTest(name: TestType) {
+        
+    }
+    
+    func getStatusOfBuild() {
+        
+    }
+    
+    func getCurrentBuildNumber() { //GET REQUEST TO POLL API AND RETURN JSON OF LATEST BUILD
+        let encodedURL: URL! = encodeURL(name: lastBuild)
+        let request: URLRequest! = createRequest(url: encodedURL, method: HTTPType.GET)
+        
+        createTask(request: request, requestType: RequestType.QUEUE)
+    }
+    
+    private func createRequest(url: URL!, method: HTTPType) -> URLRequest! {
         var request = URLRequest(url: url)
         request.httpMethod = method.rawValue
         
         return request
     }
     
-    func createTask(request: URLRequest!) {
+    private func createTask(request: URLRequest!, requestType: RequestType) {
         let task = session.dataTask(with: request!) {
             (data, response, error) in
             
@@ -70,42 +97,51 @@ class JenkinsRequest: NSObject, URLSessionDelegate {
                 }
             }
             
-            let str = NSString(data: data!, encoding: String.Encoding.utf8.rawValue)
+            let json = JSON(data: data!)
             
-            do {
-                let json = try JSONSerialization.jsonObject(with: data!, options: JSONSerialization.ReadingOptions.allowFragments) as? [String: AnyObject]
-                print(json)
-            }
-            catch _ {
-                print("Error Parsing JSON")
+            //get last build queue number
+            if let queueNumber = json["queueId"].number {
+                print(queueNumber)
             }
             
-            print(str)
+            //get last build number
+            if let buildNumber = json["number"].number {
+                print(buildNumber)
+            }
+            
+            //get build url
+            if let buildUrl = json["url"].string {
+                print(buildUrl)
+            }
+            
+            //get last build result
+            if let result = json["result"].string {
+                print(result)
+            }
+            
         }
-        
         task.resume()
+        
+    }
+
+    
+    private func setQueueId() {
+        
     }
     
-    func buildBranch(name: String) {
-        branchName = name
-        let branchBuild = buildString.appending(name)
+    private func pollQueueForBuildNumber() {
         
-        let encodedURL: URL! = encodeURL(name: branchBuild)
-
-        let request: URLRequest! = createRequest(url: encodedURL, method: HTTPMethod.POST)
-        
-        
-        //let queueLocation: String?
-        
-        createTask(request: request)
-
     }
     
-    func encodeURL(name: String) -> URL! {
+    private func pollForBuildUpdates() {
+        
+    }
+
+    private func encodeURL(name: String) -> URL! {
         return URL(string: name.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)!)
     }
     
-    func getConfigurationWithCredentials() -> URLSessionConfiguration {
+    private func getConfigurationWithCredentials() -> URLSessionConfiguration {
         let login = String(format: "%@:%@", username, password)
         let loginData = login.data(using: String.Encoding.utf8)
         

@@ -1,5 +1,5 @@
 //
-//  HTTPMethods.swift
+//  RequestTypes.swift
 //  Branch Builder
 //
 //  Created by Lucas Rose on 7/13/16.
@@ -8,7 +8,13 @@
 
 import Foundation
 
-enum HTTPMethod: String {
+enum HTTPType: String {
     case GET = "GET"
     case POST = "POST"
+}
+
+enum RequestType {
+    case BUILD
+    case QUEUE
+    case STATUS
 }
