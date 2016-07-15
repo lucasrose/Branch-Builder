@@ -144,6 +144,10 @@ class JenkinsRequest: NSObject, URLSessionDelegate {
     private func getBuildInformation(json: JSON) -> [String]! {
         var buildInformation: [String] = []
         //get last build result
+        if let queueNumber = json["queueId"].number {
+            buildInformation.append(queueNumber.stringValue)
+        }
+        
         if let result = json["result"].string {
             buildInformation.append(result)
         }
@@ -155,10 +159,6 @@ class JenkinsRequest: NSObject, URLSessionDelegate {
         //get build url
         if let buildUrl = json["url"].string {
             buildInformation.append(buildUrl)
-        }
-        
-        if let queueNumber = json["queueId"].number {
-            buildInformation.append(queueNumber.stringValue)
         }
 
         return buildInformation

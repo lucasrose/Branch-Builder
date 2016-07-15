@@ -33,13 +33,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     @IBAction func buildBranchClicked(_ sender: NSMenuItem) {
         
-        getBranchName()
-        
+        branchName = getBranchName()
+        buildBranch.isEnabled = false //set to be enabled after callback from getting status results from jenkins
+
         buildThisBranch()
         //get build status(enter test type)
         setStatusItemImage(iconName: "status-icon-in-progress")
         
-        buildBranch.isEnabled = false //set to be enabled after callback from getting status results from jenkins
         status.isEnabled = true
     }
     
@@ -62,7 +62,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     //MARK: - Helper Methods
     
-    func getBranchName() {
+    func getBranchName() -> String!{
         //Create popup to enter branch name
         let alert = NSAlert()
         let inputText = NSTextField(frame: NSRect(x: 0, y: 0, width: 200, height: 24))
@@ -73,22 +73,36 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         alert.accessoryView = inputText
         
         alert.runModal()
-        branchName = inputText.stringValue
         
+        return inputText.stringValue
     }
     
     func buildThisBranch() {
         request.buildBranch(name: branchName) { queueID in
             self.request.setQueueItem(name: queueID as! String)
-            print(self.request.getQueueId())
-            print()
             self.getBuildInformation()
         }
     }
     
     func getBuildInformation() {
         request.getCurrentBuildInformation { buildInformation in
-            print(buildInformation as! [String])
+            let currentBuild = buildInformation as! [String]
+            let queueId = Int(currentBuild[0])
+            if queueId == self.request.getQueueId() {
+                if currentBuild.contains(Status.SUCCESS.rawValue) || currentBuild.contains(Status.FAILURE.rawValue) {
+                    print(currentBuild)
+                    self.setStatusItemImage(iconName: "status-icon-successful")
+                    return
+                }
+                else {
+                    print("In Queue [Waiting for Status]")
+                    self.getBuildInformation()
+                }
+            }
+            else {
+                print("Not In Queue")
+                self.getBuildInformation()
+            }
         }
     }
     

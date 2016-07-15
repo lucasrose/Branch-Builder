@@ -8,8 +8,8 @@
 
 import Foundation
 
-enum Status: Int {
-    case PASS = 1
-    case FAIL = -1
-    case IN_PROGRESS = 0
+enum Status: String {
+    case SUCCESS = "SUCCESS"
+    case FAILURE = "FAILURE"
+    case IN_PROGRESS = "IN PROGRESS"
 }
