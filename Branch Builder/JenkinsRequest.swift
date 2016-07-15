@@ -22,6 +22,7 @@ class JenkinsRequest: NSObject, URLSessionDelegate {
     private var config: URLSessionConfiguration!
     private var session: URLSession!
     private var queueID: Int!
+    private var queueString: String! = ""
     private var buildNumber: Int!
 
     // MARK: Initialization
@@ -67,8 +68,14 @@ class JenkinsRequest: NSObject, URLSessionDelegate {
         
     }
     
-    func setQueueId(id: Int) {
-        queueID = id
+    func setQueueItem(name: String) {
+        queueString = name
+        let splitString = name.components(separatedBy: CharacterSet.decimalDigits.inverted)
+//        let splitString = name.components(separatedBy: "item/")
+        let itemString = splitString.joined(separator: "")
+        if let item = Int(itemString) {
+            queueID = item
+        }
     }
     
     func getQueueId() -> Int! {
@@ -98,19 +105,21 @@ class JenkinsRequest: NSObject, URLSessionDelegate {
                 return
             }
             
-            if let httpStatus = response as? HTTPURLResponse{
-                if httpStatus.statusCode != 200 {
-                    print("Status Code =\(httpStatus.statusCode)")
-                    print("Response = \(response)")
-                }
-            }
+//            if let httpStatus = response as? HTTPURLResponse{
+//                if httpStatus.statusCode != 200 {
+//                    print("Status Code =\(httpStatus.statusCode)")
+//                    print("Response = \(response)")
+//                }
+//            }
             
             let json = JSON(data: data!)
             
             switch(requestType) {
             case .BUILD_BRANCH:
-                if let queueLocation = json["Location"].string {
-                    completion(queueLocation)
+                if let httpUrlResponse = response as? HTTPURLResponse {
+                    if let queueLocation = httpUrlResponse.allHeaderFields["Location"] as? String {
+                        completion(queueLocation)
+                    }
                 }
                 break
             case .GET_BUILD_INFORMATION:

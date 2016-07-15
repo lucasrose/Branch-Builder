@@ -79,9 +79,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     func buildThisBranch() {
         request.buildBranch(name: branchName) { queueID in
-            self.request.setQueueId(id: Int(queueID as! String)!)
+            self.request.setQueueItem(name: queueID as! String)
+            print(self.request.getQueueId())
+            print()
             self.getBuildInformation()
-//            print(queueID)
         }
     }
     
