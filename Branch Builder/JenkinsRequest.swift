@@ -41,7 +41,7 @@ class JenkinsRequest: NSObject, URLSessionDelegate {
         session = URLSession.init(configuration: config)
     }
     
-    func buildBranch(name: String) {
+    func buildBranch(name: String, completion: (AnyObject) -> ()) {
         branchName = name
         let branchBuild = buildString.appending(name)
         
@@ -49,7 +49,7 @@ class JenkinsRequest: NSObject, URLSessionDelegate {
         
         let request: URLRequest! = createRequest(url: encodedURL, method: HTTPType.POST)
         
-        createTask(request: request, requestType: RequestType.BUILD)
+        createTask(request: request, requestType: RequestType.BUILD_BRANCH, completion: completion)
         
         //make sure our build has started (poll for matching queue ids, then when matched we will use that json to get build number)
         
@@ -67,11 +67,19 @@ class JenkinsRequest: NSObject, URLSessionDelegate {
         
     }
     
-    func getCurrentBuildNumber() { //GET REQUEST TO POLL API AND RETURN JSON OF LATEST BUILD
+    func setQueueId(id: Int) {
+        queueID = id
+    }
+    
+    func getQueueId() -> Int! {
+        return queueID
+    }
+    
+    func getCurrentBuildInformation(completion: (AnyObject) -> ()) { //GET REQUEST TO POLL API AND RETURN JSON OF LATEST BUILD
         let encodedURL: URL! = encodeURL(name: lastBuild)
         let request: URLRequest! = createRequest(url: encodedURL, method: HTTPType.GET)
         
-        createTask(request: request, requestType: RequestType.QUEUE)
+        createTask(request: request, requestType: RequestType.GET_BUILD_INFORMATION, completion: completion)
     }
     
     private func createRequest(url: URL!, method: HTTPType) -> URLRequest! {
@@ -81,7 +89,7 @@ class JenkinsRequest: NSObject, URLSessionDelegate {
         return request
     }
     
-    private func createTask(request: URLRequest!, requestType: RequestType) {
+    private func createTask(request: URLRequest!, requestType: RequestType, completion: (AnyObject) -> ()) {
         let task = session.dataTask(with: request!) {
             (data, response, error) in
             
@@ -99,31 +107,55 @@ class JenkinsRequest: NSObject, URLSessionDelegate {
             
             let json = JSON(data: data!)
             
+            
+            switch(requestType) {
+            case .BUILD_BRANCH:
+                if let queueNumber = json["queueId"].number {
+                    completion(queueNumber.stringValue)
+                    //                print(queueNumber)
+                }
+                break
+            case .GET_BUILD_INFORMATION:
+                let build = self.getBuildInformation(json: json)
+                completion(build!)
+                break
+            case .GET_STATUS_OF_BUILD:
+                break
+            case .GET_STATUS_OF_TESTS:
+                break
+            }
             //get last build queue number
-            if let queueNumber = json["queueId"].number {
-                print(queueNumber)
-            }
+
             
-            //get last build number
-            if let buildNumber = json["number"].number {
-                print(buildNumber)
-            }
-            
-            //get build url
-            if let buildUrl = json["url"].string {
-                print(buildUrl)
-            }
-            
-            //get last build result
-            if let result = json["result"].string {
-                print(result)
-            }
+//            //get last build number
             
         }
         task.resume()
         
     }
 
+    private func getBuildInformation(json: JSON) -> [String]! {
+        var buildInformation: [String] = []
+        //get last build result
+        if let result = json["result"].string {
+            buildInformation.append(result)
+        }
+        
+        if let buildNumber = json["number"].number {
+            buildInformation.append(buildNumber.stringValue)
+        }
+    
+        //get build url
+        if let buildUrl = json["url"].string {
+            buildInformation.append(buildUrl)
+        }
+        
+        if let queueNumber = json["queueId"].number {
+            buildInformation.append(queueNumber.stringValue)
+        }
+
+        return buildInformation
+    }
     
     private func setQueueId() {
         

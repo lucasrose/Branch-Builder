@@ -14,7 +14,8 @@ enum HTTPType: String {
 }
 
 enum RequestType {
-    case BUILD
-    case QUEUE
-    case STATUS
+    case BUILD_BRANCH
+    case GET_BUILD_INFORMATION
+    case GET_STATUS_OF_BUILD
+    case GET_STATUS_OF_TESTS
 }

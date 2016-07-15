@@ -33,12 +33,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     @IBAction func buildBranchClicked(_ sender: NSMenuItem) {
         
-        branchName = getBranchName()
+        getBranchName()
         //build branch -> returns build number
 //        request.buildBranch(name: branchName)
-        request.getCurrentBuildNumber()
+        //buildThisBranch()
+        getBuildInformation()
         //get build status(enter test type)
-        
         setStatusItemImage(iconName: "status-icon-in-progress")
         
         buildBranch.isEnabled = false //set to be enabled after callback from getting status results from jenkins
@@ -65,19 +65,38 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     //MARK: - Helper Methods
     
-    func getBranchName() -> String?{
+    func getBranchName() {
         //Create popup to enter branch name
-        let inputName = NSAlert()
+        let alert = NSAlert()
         let inputText = NSTextField(frame: NSRect(x: 0, y: 0, width: 200, height: 24))
         inputText.stringValue = branchName
         
-        inputName.messageText = "Enter Branch Name:"
-        inputName.addButton(withTitle: "Done")
-        inputName.accessoryView = inputText
+        alert.messageText = "Enter Branch Name:"
+        alert.addButton(withTitle: "Done")
+        alert.accessoryView = inputText
         
-        inputName.runModal()
+        alert.runModal()
+        branchName = inputText.stringValue
         
-        return inputText.stringValue
+    }
+    
+    func buildThisBranch() {
+//        var locked = true
+        request.buildBranch(name: branchName) { queueID in
+            self.request.setQueueId(id: Int(queueID as! String)!)
+            self.getBuildInformation()
+//            locked = false
+        }
+        
+//        while(locked){
+//            wait()
+//        }
+    }
+    
+    func getBuildInformation() {
+        request.getCurrentBuildInformation { buildInformation in
+            print(buildInformation as! [String])
+        }
     }
     
     func setStatusItemImage(iconName: String!){
