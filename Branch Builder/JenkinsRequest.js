@@ -1,5 +1,5 @@
 var jenkinsapi = require('jenkins-api');
-var jenkins = jenkinsapi.init('https://${username}:${token}@http://jenkins.reach.rackspace.com');
+var jenkins = jenkinsapi.init('https://${username}:${token}@${sitename}');
 
 var test = function {
     return "test"

@@ -13,8 +13,8 @@ class JenkinsRequest: NSObject, URLSessionDelegate {
     
     // MARK: Global Variables
 
-    private let hostString: String! = "https://jenkins.reach.rackspace.com/job/Reach_Branch/"
-    private let lastBuild = "https://jenkins.reach.rackspace.com/job/Reach_Branch/lastBuild/api/json"
+    private let hostString: String! = "projectBranch/"
+    private let lastBuild = "projectBranch/lastBuild/api/json"
     private var buildString: String!
     private var username: String! = ""
     private var password: String! = ""
